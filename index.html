@@ -27,7 +27,6 @@
 <div id="panel"></div>
 
 <div class="toptop">
-    <!--<div style="margin: 0 auto; width:960px; background: url(/bitrix/templates/lebigmag/img/top_bg.png) center top repeat-x;">-->
     <div style="margin: 0 auto; width:960px; background: center top repeat-x;">
         <table border="0" cellspacing="0" cellpadding="0" width="960">
             <tbody>
@@ -54,9 +53,7 @@
                     </div>
 
                     <div style="float: right;" id="cart_line">
-                        <!--<a class="basket_a" href=""> -->
                         <span class="basket_i">корзина всегда будет пуста</span>
-                        <!--</a> -->
                     </div>
 
                     <div style="clear: both;"></div>
@@ -123,36 +120,21 @@
 
 
                     <script type="text/javascript">
-    $(function () {
-        $('div.big_mag a').fancybox({
-            'transitionIn':'fade',
-            'transitionOut':'fade',
-            'speedIn':600,
-            'speedOut':200,
-            'overlayShow':true,
-            'cyclic':true,
-            'padding':20,
-            'titlePosition':'over',
-            'onComplete':function () {
-                $("#fancybox-title").css({ 'top':'100%', 'bottom':'auto' });
-            }
-        });
-
-        $('div.mini_mag a').fancybox({
-            'transitionIn':'fade',
-            'transitionOut':'fade',
-            'speedIn':600,
-            'speedOut':200,
-            'overlayShow':true,
-            'cyclic':true,
-            'padding':20,
-            'titlePosition':'over',
-            'onComplete':function () {
-                $("#fancybox-title").css({ 'top':'100%', 'bottom':'auto' });
-            }
-        });
-    });
-
+                        $(function () {
+                            $('div.big_mag a').fancybox({
+                                'transitionIn':'fade',
+                                'transitionOut':'fade',
+                                'speedIn':600,
+                                'speedOut':200,
+                                'overlayShow':true,
+                                'cyclic':true,
+                                'padding':20,
+                                'titlePosition':'over',
+                                'onComplete':function () {
+                                    $("#fancybox-title").css({ 'top':'100%', 'bottom':'auto' });
+                                }
+                            });
+                        });
                     </script>
 
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -261,46 +243,22 @@
         <table border="0" cellspacing="0" cellpadding="0" width="960">
             <tbody>
             <tr>
-
-
                 <td align="right" valign="center">
-                        <span class="footer_text">
-                            <div style="text-align: right;">
-                                <span style="text-align: right;">© leshooflad</span>
-                            </div>
-                        </span>
+                    <span class="footer_text">
+                        <div style="text-align: right;">
+                            <span style="text-align: right;">© leshooflad</span>
+                        </div>
+                    </span>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
     <script type="text/javascript">
-	jQuery(document).ready(function(){
-		resiediv();
-	});
-
-	jQuery("#mags").bind("DOMSubtreeModified",function(){
-		resiediv();
-	});
-
-	function resiediv()
-	{
-		var winh=jQuery(window).height();
-		var oBlock = document.getElementById('mags'); 
-		var divh=oBlock.offsetHeight; 
-		winh=winh-120-45;
-		if (divh < winh)
-			{
-			divh=winh-20;
-			oBlock.style.height=divh+"px";
-			}	  
-	}
-
-    Dropzone.options.myDropzone = {
-        // Configuration options go here
-    };
-    Dropzone.discover();
-
+        Dropzone.options.myDropzone = {
+            // Configuration options go here
+        };
+        Dropzone.discover();
     </script>
 </div>
 
