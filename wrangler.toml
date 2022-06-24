@@ -1,0 +1,13 @@
+name = "leshooflad"
+type = "webpack"
+route = ''
+zone_id = ''
+usage_model = ''
+account_id = '891d3a91fc63b613f18c8fc05a6c843f'
+compatibility_flags = []
+workers_dev = true
+compatibility_date = "2022-06-24"
+
+[site]
+bucket = "./public"
+entry-point = "workers-site"
