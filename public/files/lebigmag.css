@@ -79,7 +79,7 @@ body {
 .toptop {
     width: 100%;
     height: 100px;
-    background: url(img/top_bg.png) center top repeat-x;
+    background: url(top_bg.png) center top repeat-x;
     position: fixed;
     /*position: absolute;*/
     z-index: 100;
@@ -96,7 +96,7 @@ body {
     width: 100%;
     padding-top: 8px;
     padding-bottom: 9px;
-    background: url(img/line_bottom.gif) center top repeat-x;
+    background: url(line_bottom.gif) center top repeat-x;
 
 }
 
@@ -104,7 +104,7 @@ body {
 .search {
     width: 300px;
     height: 24px;
-   /* background: url(img/bg_search.gif) left top no-repeat;*/
+   /* background: url(bg_search.gif) left top no-repeat;*/
 }
 
 .topsearch {
@@ -120,14 +120,14 @@ body {
 }
 
 .topsearch_button {
-    background: url(img/search_but.png) left top no-repeat;
+    background: url(search_but.png) left top no-repeat;
     border: 0;
     width: 50;
     height: 24;
 }
 
 .topsearch_button:hover {
-    background: url(img/search_but_over.png) left top no-repeat;
+    background: url(search_but_over.png) left top no-repeat;
 
 }
 
@@ -137,7 +137,7 @@ body {
     bottom: 0;
     width: 210px;
     height: 330px;
-    background: url(img/bg_cola.jpg) left top no-repeat;
+    background: url(bg_cola.jpg) left top no-repeat;
 }
 
 .blog_right {
@@ -161,7 +161,7 @@ body {
     margin-left: 19px;
     margin-right: 19px;
     margin-bottom: 10px;
-    /*background:url(img/line_blog_right.gif) bottom left no-repeat;*/
+    /*background:url(line_blog_right.gif) bottom left no-repeat;*/
 }
 
 .blog_right_block_last {
@@ -301,7 +301,7 @@ body {
     height: 20px;
     margin: 0px;
     padding: 0px;
-    background: url(img/mini_basket_over.gif) center center no-repeat;
+    background: url(mini_basket_over.gif) center center no-repeat;
     cursor: pointer;
     border-width: 1px;
     border-color: #ffffff;
@@ -319,7 +319,7 @@ body {
     height: 20px;
     margin: 0px;
     padding: 0px;
-    background: url(img/mini_basket_over_full.gif) center center no-repeat;
+    background: url(mini_basket_over_full.gif) center center no-repeat;
     cursor: pointer;
     border-width: 1px;
     border-color: #ffffff;
@@ -344,14 +344,14 @@ body {
 	color: #ffffff;
 	text-decoration:none;
 	cursor:pointer;
-	background:url(img/bg_but_inbasket.gif) center center no-repeat;
+	background:url(bg_but_inbasket.gif) center center no-repeat;
 	border-width:1px;
 	border-color:#1d1d1b;
 	border-style:solid;
 }
 
 .big_but_inbasket:hover{
-	background:url(img/bg_but_inbasket_over.gif) center center no-repeat;
+	background:url(bg_but_inbasket_over.gif) center center no-repeat;
 	color:#1d1d1b;
 	border-style:dashed;
 }
@@ -362,7 +362,7 @@ body {
     height: 32px;
     padding-left: 34px;
     text-align: center;
-    background: url(img/bg_but_inbasket_over.gif) center center no-repeat;
+    background: url(bg_but_inbasket_over.gif) center center no-repeat;
     border-width: 1px;
     border-color: #ffffff;
     border-style: solid;
@@ -373,7 +373,7 @@ body {
     margin-top: -160px;
     width: 100%;
     height: 100%;
-    background: url(img/black_bg_basket.png) top left repeat;
+    background: url(black_bg_basket.png) top left repeat;
     z-index: 1000;
 } */
 
@@ -388,7 +388,7 @@ body {
     width: 780px;
 }
 #pop_bg {
-    background: url("img/black_bg_basket.png") repeat scroll left top transparent;
+    background: url("black_bg_basket.png") repeat scroll left top transparent;
     height: 100%;
     left: 0;
     opacity: 1;
@@ -684,7 +684,7 @@ input.topsearch:focus{
 
 .paginator_active
 {
-    background: url(img/li_active.gif) center center no-repeat;
+    background: url(li_active.gif) center center no-repeat;
     color: white;
     text-decoration: none;
     font-family: Arial, Tahoma, "Times New Roman", Times, serif;
@@ -707,7 +707,7 @@ input.topsearch:focus{
 
 
 .usa_alphabet>li.active {
-    background: url(img/li_active.gif) center center no-repeat;
+    background: url(li_active.gif) center center no-repeat;
 }
 
 .usa_alphabet>li.active span {

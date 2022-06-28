@@ -374,7 +374,7 @@ function replaceSearch()
     $(input).attr({"type":"text", "height":"24", "id":id,"name":"q","value":"","autocomplete":"off"}).addClass("topsearch").blur(function(){
         replaceSearchBlur();
     }).focus(function(){
-            if(this.value == 'поиск') this.value = '';
+            if(this.value == 'search') this.value = '';
         });
     $(form).append(input);
     $(par).append(form);
@@ -388,7 +388,7 @@ function replaceSearchBlur()
     $(uri).attr({"id":"a_search"}).addClass("mainmenu_search").click(function(){
         javascript:replaceSearch();
     });
-    $(uri).html("поиск");
+    $(uri).html("search");
     par.append(uri);
 
 }
