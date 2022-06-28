@@ -113,7 +113,7 @@ async function handleFileUpload(request) {
     type: file.type,
     size: file.size,
     hash,
-  }));
+  }), {status: 200, headers: {"Content-Type": "application/json"}});
 }
 
 async function sha1(file) {

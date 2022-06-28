@@ -153,7 +153,7 @@
                                             <td align="left" valign="top">
                                                 <form action="/file-upload" class="dropzone" id="my-dropzone" style="height: 400px;" enctype="multipart/form-data" method="post">
                                                     <div class="fallback">
-                                                        <input name="file" type="file" multiple />
+                                                        <input name="file" type="file" />
                                                     </div>
                                                 </form>
                                             </td>
@@ -167,6 +167,7 @@
 
                             </td>
                             <td valign="top" align="left" style="padding-left:20px;">
+                                <!--https://codepen.io/naazim/pen/JKjgwL-->
                                 <span class="mag_bigname">Dansk</span>
                                 <br>
                                 <span class="mag_subname"> Autumn/Winter 2018</span>
@@ -255,8 +256,24 @@
         </table>
     </div>
     <script type="text/javascript">
+        // https://stackoverflow.com/questions/22005054/dropzone-upload-only-one-file
+        // https://stackoverflow.com/questions/31401693/how-to-disable-dropzone-js-after-choosing-file
         Dropzone.options.myDropzone = {
             // Configuration options go here
+            uploadMultiple: false,
+            thumbnailWidth: null,
+            thumbnailHeight: null,
+            addRemoveLinks: true,
+            maxFiles: 1,
+            init: function() {
+                this.hiddenFileInput.removeAttribute('multiple');
+                this.on('maxfilesreached', function() {
+                    this.removeEventListeners();
+                });
+                this.on('removedfile', function (file) {
+                    this.setupEventListeners();
+                });
+            }
         };
         Dropzone.discover();
     </script>
