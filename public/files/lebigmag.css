@@ -18,6 +18,69 @@ body {
     clear: both;
 }
 
+.textshadow {
+   color: transparent;
+   text-shadow: 0 0 15px rgba(0,0,0,1.5);
+}
+
+.preloader {
+  display: block;
+  position: relative;
+  height: 100%;
+  background: #f6f7f8;
+  background-image: -webkit-gradient( linear, left center, right center, from(#f6f7f8), color-stop(.2, #edeef1), color-stop(.4, #f6f7f8), to(#f6f7f8));
+  background-image: -webkit-linear-gradient( left, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 100%;
+  animation: placeHolderShimmer 4s linear infinite forwards;
+  > * {
+    background: transparent;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    overflow: hidden;
+    &:after {
+      content: '';
+      position: absolute;
+      border: 500px solid #fff;
+      width: 100%;
+    }
+  }
+  .loader-circle {
+    height: 200px;
+    &:after {
+      left: -325px;
+      top: -475px;
+      border-radius: 100%;
+      width: 150px;
+      height: 150px;
+    }
+  }
+  .loader-bar {
+    height: 40px;
+    &:after {
+      left: -85%;
+      top: -485px;
+      border-radius: 1500px;
+      height: 10px;
+      width: 60%;
+    }
+  }
+  .filler{
+    height: 20px;
+    background: #fff;
+  }
+}
+
+@-webkit-keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
 .basket_yo {
     padding-left: 60px;
     padding-top: 7px;
