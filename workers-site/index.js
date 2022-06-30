@@ -107,13 +107,23 @@ async function handleFileUpload(request) {
   const file = formData.get('file');
 
   const hash = await sha1(file);
+  const exc = await excerpt(file);
 
-  return new Response(JSON.stringify({
-    name: file.name,
-    type: file.type,
-    size: file.size,
-    hash,
-  }), {status: 200, headers: {"Content-Type": "application/json"}});
+  return new Response(
+    JSON.stringify({
+      name: file.name,
+      type: file.type,
+      size: file.size,
+      excerpt: exc,
+      hash,
+    }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
 }
 
 async function sha1(file) {
@@ -122,4 +132,11 @@ async function sha1(file) {
   const array = Array.from(new Uint8Array(digest));
   const sha1 =  array.map(b => b.toString(16).padStart(2, '0')).join('')
   return sha1;
+}
+
+async function excerpt(file) {
+  const filePromise = file.text();
+  return await filePromise.then(function(value) {
+    return (value || "").slice(0, 700);
+  });
 }
