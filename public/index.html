@@ -140,6 +140,8 @@
                                 <div class="mag_bigname loader-bar texttitle">Title</div>
                                 <br>
                                 <span class="mag_subname textsize">Size</span>
+                                <br>
+                                <span class="mag_subname hash"></span>
 
                                 <img src="./files/line_450.gif" border="0" vspace="10">
 
@@ -242,6 +244,20 @@
                 });
                 $(".control input.submit").live("click", function(event) {
                     event.preventDefault();
+                    $.ajax({
+                        url: "/submit",
+                        type: "POST",
+                        data: JSON.stringify({
+                            "email": $(".control input.email").val() || "",
+                            "hash": $(".setup .hash").text(),
+                            "value": $(".setup input.rangecontrol").val()
+                        }),
+                        success: function(data) {
+                            console.log(data);
+                        },
+                        contentType:"application/json; charset=utf-8",
+                        dataType: "json"
+                    });
                 });
                 this.hiddenFileInput.removeAttribute('multiple');
                 $(".setup .timetoreadhint").hide();
@@ -256,6 +272,7 @@
 
                     $(".setup .texttitle").text("Title");
                     $(".setup .textsize").text("Size");
+                    $(".setup .hash").text("");
                     $(".setup .timetoread").text("unknown");
                     $(".setup .excerpt").text("Text excerpt");
                     $(".setup .timetoreadhint").hide();
@@ -265,6 +282,7 @@
                 this.on("success", function(file, response) {
                     $(".setup .texttitle").text(response.name);
                     $(".setup .textsize").text("" + response.size + " b");
+                    $(".setup .hash").text(response.hash);
                     $(".setup .timetoread").text("" + Math.floor((response.size / 987) * 100) / 100 + " minutes");
                     $(".setup .excerpt").text(response.excerpt);
                     $(".setup .timetoreadhint").show();

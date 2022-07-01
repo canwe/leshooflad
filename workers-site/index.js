@@ -31,6 +31,10 @@ async function handleEvent(event) {
     return handleFileUpload(event.request)
   }
 
+  if ('/submit' == url.pathname) {
+    return handleSubmit(event.request)
+  }
+
   let options = {}
 
   /**
@@ -139,4 +143,24 @@ async function excerpt(file) {
   return await filePromise.then(function(value) {
     return (value || "").slice(0, 700);
   });
+}
+
+/**
+ * Respond with hello worker text
+ * @param {Request} request
+ */
+async function handleSubmit(request) {
+  const json = await request.json();
+
+  return new Response(
+    JSON.stringify({
+      status: "ok",
+    }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
 }
