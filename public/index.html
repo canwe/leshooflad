@@ -69,7 +69,7 @@
                         </tbody>
                     </table>
 
-                    <h1 style="text-align: left;"><a href="https://lebigmag.ru/"><img
+                    <h1 style="text-align: left;"><a href="index.html"><img
                             src="./files/a859cb79afa3539bd74ec557acc40fe9.png"
                             title="lebigmag_trans_naked.png" border="0" alt="lebigmag_trans_naked.png" width="153"
                             height="27"></a></h1>
@@ -163,6 +163,7 @@
                                             emails, each next only after you read the previous. Control your pace.
                                             <br/>
                                             <input type="email" class="email" size="50" required style='width: 250px'>
+                                            <input type="submit" class="submit" style='width: 60px' value="Submit">
                                         </td>
                                     </tr>
                                     </tbody>
@@ -236,8 +237,11 @@
             addRemoveLinks: true,
             maxFiles: 1,
             init: function() {
-                $(".setup input.rangecontrol" ).live("input", function(event) {
+                $(".setup input.rangecontrol").live("input", function(event) {
                     $(".setup .rangevalue").text($(this).val());
+                });
+                $(".control input.submit").live("click", function(event) {
+                    event.preventDefault();
                 });
                 this.hiddenFileInput.removeAttribute('multiple');
                 $(".setup .timetoreadhint").hide();
