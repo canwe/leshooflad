@@ -92,17 +92,17 @@
                         <li style="position: relative;">
                             <div style="position:absolute; top:5px; left:-14px;" class="div_menu_active">
                                 <img src="./files/bull.gif" border="0"></div>
-                            <span class="left_menu_active" uri="/mags/reselected/">
+                            <span class="left_menu_active">
 									 <a class="left_menu" href="index.html">/ what's</a>
 								</span>&nbsp;
                             <span class="left_menu_num"><sup></sup></span>
                         </li>
                         <li>
-                            <a class="left_menu" href="https://lebigmag.ru/mags/sale/">/ mm?</a>
+                            <a class="left_menu" href="index.html">/ mm?</a>
                             <span class="left_menu_num"><sup></sup></span>
                         </li>
                         <li>
-                            <a class="left_menu" href="https://lebigmag.ru/mags/architecture_design/">/ there</a>
+                            <a class="left_menu" href="index.html">/ there</a>
                             <span class="left_menu_num"><sup></sup></span>
                         </li>
                     </ul>
@@ -145,33 +145,31 @@
 
 
                                 <br>
-                                <table border="0" cellspacing="0" cellpadding="0" height="34"
-                                       style="margin-bottom:10px;">
+                                <table border="0" cellspacing="0" cellpadding="0" height="34" style="margin-bottom:10px;" class="control">
                                     <tbody>
                                     <tr>
-
                                         <td valign="center" style="padding-right:10px;">
-                                            <span class="text_big_price">Control</span>
+                                            <span class="text_big_price">Control Your Pace</span>
                                         </td>
                                     </tr>
-
                                     <tr>
-                                        <td valign="center" style="padding-right:10px;">
-                                            <span class="text_big_price">Your</span>
+                                        <td valign='center' style='padding-right:10px;' class='rangecontrols'>
+                                            <input type='range' min='1' max='1000' value='10' class='rangecontrol' style='width: 250px'>
+                                            &nbsp
+                                            <span class='rangevalue'>10</span>
+                                            <br/>
+                                            Enter your email below, and we will send you a whopping
+                                            <span class='rangevalue' style="font-weight: bold">10</span>
+                                            emails, each next only after you read the previous. Control your pace.
+                                            <br/>
+                                            <input type="email" class="email" size="50" required style='width: 250px'>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td valign="center" style="padding-right:10px;">
-                                            <span class="text_big_price">Pace</span>
-                                        </td>
-                                    </tr>
-
                                     </tbody>
                                 </table>
                                 <img src="./files/line_450.gif" border="0" vspace="10" alt="">
                                 <span class="text">
-                                    <div class="excerpt">
+                                    <div class="excerpt" style="width: 300px">
                                         Text excerpt
                                     </div>
 
@@ -229,6 +227,7 @@
         // https://stackoverflow.com/questions/22005054/dropzone-upload-only-one-file
         // https://stackoverflow.com/questions/31401693/how-to-disable-dropzone-js-after-choosing-file
         // https://stackoverflow.com/questions/59599711/how-to-get-server-response-in-dropzonejs
+        // https://irisreading.com/average-reading-speed-in-various-languages/
         Dropzone.options.myDropzone = {
             // Configuration options go here
             uploadMultiple: false,
@@ -237,9 +236,12 @@
             addRemoveLinks: true,
             maxFiles: 1,
             init: function() {
-
+                $(".setup input.rangecontrol" ).live("input", function(event) {
+                    $(".setup .rangevalue").text($(this).val());
+                });
                 this.hiddenFileInput.removeAttribute('multiple');
                 $(".setup .timetoreadhint").hide();
+                $(".setup .rangecontrols").hide();
 
                 this.on('maxfilesreached', function() {
                     this.removeEventListeners();
@@ -253,14 +255,16 @@
                     $(".setup .timetoread").text("unknown");
                     $(".setup .excerpt").text("Text excerpt");
                     $(".setup .timetoreadhint").hide();
+                    $(".setup .rangecontrols").hide();
                 });
 
                 this.on("success", function(file, response) {
                     $(".setup .texttitle").text(response.name);
                     $(".setup .textsize").text("" + response.size + " b");
-                    $(".setup .timetoread").text("" + Math.floor((response.size / 250) * 100) / 100 + " minutes");
+                    $(".setup .timetoread").text("" + Math.floor((response.size / 987) * 100) / 100 + " minutes");
                     $(".setup .excerpt").text(response.excerpt);
                     $(".setup .timetoreadhint").show();
+                    $(".setup .rangecontrols").show();
                 });
             }
         };
