@@ -12,15 +12,10 @@
     <script type="text/javascript" src="./files/script.js"></script>
     <script type="text/javascript" src="./files/jquery.fancybox-1.3.1.pack.js"></script>
     <script type="text/javascript" src="./files/lebigmag.js"></script>
-    <script type="text/javascript" src="./files/SliderOldJournal.js"></script>
     <script type="text/javascript" src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
     <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
     <title>Le Shooflad</title>
     <link rel="stylesheet" type="text/css" href="./files/lebigmag.css">
-    <script type="text/javascript">if (document.documentElement) {
-        document.documentElement.id = "js"
-    }
-    </script>
 </head>
 <body>
 <div id="panel"></div>
@@ -159,10 +154,11 @@
                                             <input type='range' min='1' max='1000' value='10' class='rangecontrol' style='width: 250px'>
                                             &nbsp
                                             <span class='rangevalue'>10</span>
-                                            <br/>
-                                            Enter your email below, and we will send you a whopping
-                                            <span class='rangevalue' style="font-weight: bold">10</span>
-                                            emails, each next only after you read the previous. Control your pace.
+                                            <div style="margin-top: 10px; margin-bottom: 5px;">
+                                                Enter your email below, and we will send you a whopping
+                                                <span class='rangevalue' style="font-weight: bold">10</span>
+                                                emails, each next only after you read the previous. Control your pace.
+                                            </div>
                                             <br/>
                                             <input type="email" class="email" size="50" required style='width: 250px'>
                                             <input type="submit" class="submit" style='width: 60px' value="Submit">
