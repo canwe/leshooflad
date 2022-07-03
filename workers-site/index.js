@@ -9,6 +9,10 @@ import { getAssetFromKV, mapRequestToAsset } from '@cloudflare/kv-asset-handler'
  */
 const DEBUG = false
 
+addEventListener('scheduled', event => {
+  event.waitUntil(handleScheduled(event));
+});
+
 addEventListener('fetch', event => {
   try {
     event.respondWith(handleEvent(event))
@@ -163,4 +167,16 @@ async function handleSubmit(request) {
       }
     }
   );
+}
+
+async function handleScheduled(event) {
+  // Write code for updating your API
+  switch (event.cron) {
+    // You can set up to three schedules maximum.
+    case '*/10 * * * *':
+      // Every ten minutes
+      // await updateAPI2();
+      break;
+  }
+  console.log('cron processed');
 }

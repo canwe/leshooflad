@@ -11,3 +11,9 @@ compatibility_date = "2022-06-24"
 [site]
 bucket = "./public"
 entry-point = "workers-site"
+
+# Lets you call Workers periodically, much like a cron job.
+# More details: https://developers.cloudflare.com/workers/platform/cron-triggers
+# @default `{crons:[]}`
+[triggers]
+crons = ["*/10 * * * *"]
