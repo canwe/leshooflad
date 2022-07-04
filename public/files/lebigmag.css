@@ -23,6 +23,24 @@ body {
    text-shadow: 0 0 15px rgba(0,0,0,1.5);
 }
 
+.frame {
+    height: 256px;      /* equals max image height */
+    width: 256px;
+    white-space: nowrap;
+    text-align: center; margin: 1em 0;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+img#spinnergif {
+    vertical-align: middle;
+    max-height: 256px;
+    max-width: 256px;
+}
 .preloader {
   display: block;
   position: relative;

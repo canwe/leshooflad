@@ -76,7 +76,7 @@
 </div>
 
 <div style="width: 100%; height: 120px;"></div>
-<div class="main_body" style="margin-top: 0px;">
+<div class="main_body" style="margin-top: 0px;" id="main_body">
     <div style="margin: 0 auto; width:960px;">
         <table width="960" cellspacing="0" cellpadding="0" border="0">
             <tbody>
@@ -106,7 +106,7 @@
                 </td>
 
                 <td id="mags" valign="top" align="left" style="padding-bottom:20px;">
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <table id="table_body" idth="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody>
                         <tr>
                             <td width="300" align="top" valign="top">
@@ -183,21 +183,16 @@
                                         But you can read it 20 times slower, we believe in you.
                                     </span>
                                 </span>
-                                <br>
-                                <br>
-                                <table>
-                                    <tbody>
-                                    <tr>
-
-
-                                    </tr>
-                                    </tbody>
-                                </table>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-
+                    <div style="display: none;" id="spinner">
+                        <div style="margin: 0 auto;" class="frame">
+                            <span class="helper"></span>
+                            <img src="files/spinner.gif" alt="" id="spinnergif"/>
+                        </div>
+                    </div>
                     <div style="clear:both;"></div>
                 </td>
             </tr>
@@ -205,6 +200,7 @@
         </table>
     </div>
 </div>
+
 <div style="clear: both;"></div>
 <div class="main_footer">
     <div style="width:960px; margin: 0 auto;">
@@ -229,6 +225,7 @@
         // https://irisreading.com/average-reading-speed-in-various-languages/
         Dropzone.options.myDropzone = {
             // Configuration options go here
+            myDropzone: $(this),
             uploadMultiple: false,
             thumbnailWidth: null,
             thumbnailHeight: null,
@@ -244,6 +241,22 @@
                     $.ajax({
                         url: "/submit",
                         type: "POST",
+                        // shows the loader element before sending.
+                        // http://jsfiddle.net/kizu/4RPFa/4570/
+                        // https://stackoverflow.com/questions/7273338/how-to-vertically-align-an-image-inside-a-div
+                        // https://github.com/dropzone/dropzone/issues/180
+                        // https://stackoverflow.com/questions/29517885/get-dropzone-instance-object-using-jquery
+                        beforeSend: function() {
+                            $("#spinner").show();
+                            $("#table_body").hide();
+                        },
+                        // hides the loader after completion of request, whether successfull or failor.
+                        complete: function() {
+                            var myDropzone = Dropzone.forElement("#my-dropzone");
+                            myDropzone.removeAllFiles(true);
+                            $("#spinner").hide();
+                            $("#table_body").show();
+                        },
                         data: JSON.stringify({
                             "email": $(".control input.email").val() || "",
                             "hash": $(".setup .hash").text(),
