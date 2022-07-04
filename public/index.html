@@ -2,20 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru" id="js">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script type="text/javascript" src="./files/jquery-1.4.2.min.js"></script>
-
     <meta name="robots" content="index, follow">
     <link href="./files/styles.css" type="text/css" rel="stylesheet">
     <link href="./files/template_styles.css" type="text/css" rel="stylesheet">
+    <link href="./files/lebigmag.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="./files/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="./files/core.js"></script>
     <script type="text/javascript" src="./files/core_ajax.js"></script>
     <script type="text/javascript" src="./files/script.js"></script>
-    <script type="text/javascript" src="./files/jquery.fancybox-1.3.1.pack.js"></script>
     <script type="text/javascript" src="./files/lebigmag.js"></script>
     <script type="text/javascript" src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
-    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" type="text/css" rel="stylesheet"/>
     <title>Le Shooflad</title>
-    <link rel="stylesheet" type="text/css" href="./files/lebigmag.css">
 </head>
 <body>
 <div id="panel"></div>
@@ -190,7 +188,9 @@
                     <div style="display: none;" id="spinner">
                         <div style="margin: 0 auto;" class="frame">
                             <span class="helper"></span>
-                            <img src="files/spinner.gif" alt="" id="spinnergif"/>
+                            <span id="spinnerspan">
+                                <img src="files/spinner.gif" alt="" id="spinnergif"/>
+                            </span>
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -254,8 +254,14 @@
                         complete: function() {
                             var myDropzone = Dropzone.forElement("#my-dropzone");
                             myDropzone.removeAllFiles(true);
-                            $("#spinner").hide();
-                            $("#table_body").show();
+                            $("#spinnergif").hide();
+                            $("#spinnerspan")
+                              .css("font-size", "5em")
+                              .css("color", "#9AFF9A")
+                              .text("Thank you").fadeOut("slow", function() {
+                                $("#table_body").show();
+                                $("#spinner").hide();
+                            });
                         },
                         data: JSON.stringify({
                             "email": $(".control input.email").val() || "",
@@ -302,28 +308,6 @@
         };
         Dropzone.discover();
     </script>
-</div>
-
-
-<div id="fancybox-tmp"></div>
-<div id="fancybox-loading">
-    <div></div>
-</div>
-<div id="fancybox-overlay"></div>
-<div id="fancybox-wrap">
-    <div id="fancybox-outer">
-        <div class="fancy-bg" id="fancy-bg-n"></div>
-        <div class="fancy-bg" id="fancy-bg-ne"></div>
-        <div class="fancy-bg" id="fancy-bg-e"></div>
-        <div class="fancy-bg" id="fancy-bg-se"></div>
-        <div class="fancy-bg" id="fancy-bg-s"></div>
-        <div class="fancy-bg" id="fancy-bg-sw"></div>
-        <div class="fancy-bg" id="fancy-bg-w"></div>
-        <div class="fancy-bg" id="fancy-bg-nw"></div>
-        <div id="fancybox-inner"></div>
-        <a id="fancybox-close"></a><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a>
-        <a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a>
-    </div>
 </div>
 </body>
 </html>
