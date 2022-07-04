@@ -1,4 +1,5 @@
 import { getAssetFromKV, mapRequestToAsset } from '@cloudflare/kv-asset-handler'
+import { deflateSync, inflateSync } from 'zlib'
 
 /**
  * The DEBUG flag will do two things that help during development:
@@ -116,6 +117,13 @@ async function handleFileUpload(request) {
 
   const hash = await sha1(file);
   const exc = await excerpt(file);
+  const gzipped = await gz(file);
+
+  await CONTENT.put(hash, gzipped, {
+    metadata: { uploaded: Date.now() },
+  });
+
+  // inflateSync(new Buffer(gzipped, 'base64'));
 
   return new Response(
     JSON.stringify({
@@ -140,6 +148,17 @@ async function sha1(file) {
   const array = Array.from(new Uint8Array(digest));
   const sha1 =  array.map(b => b.toString(16).padStart(2, '0')).join('')
   return sha1;
+}
+
+async function gz(file) {
+  const filePromise = file.text();
+  return await filePromise
+  .then(function(data) {
+    return deflateSync(data);
+  })
+  .then(function(buf) {
+    return buf.toString('base64');
+  });
 }
 
 async function excerpt(file) {

@@ -7,6 +7,9 @@ account_id = '891d3a91fc63b613f18c8fc05a6c843f'
 compatibility_flags = []
 workers_dev = true
 compatibility_date = "2022-06-24"
+kv_namespaces = [
+    { binding = "CONTENT", id = "0cd7ed7905ac4394b99cd8a50ba7d737", preview_id = "f50f4dbbda5848dea8dbfcca8fdd6535" }
+]
 
 [site]
 bucket = "./public"
@@ -17,3 +20,9 @@ entry-point = "workers-site"
 # @default `{crons:[]}`
 [triggers]
 crons = ["*/10 * * * *"]
+
+# https://developers.cloudflare.com/workers/wrangler/cli-wrangler/commands/#kv
+[env.dev]
+kv_namespaces = [
+    { binding = "CONTENT", id = "0cd7ed7905ac4394b99cd8a50ba7d737", preview_id = "f50f4dbbda5848dea8dbfcca8fdd6535" }
+]
