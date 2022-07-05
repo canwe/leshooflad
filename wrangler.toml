@@ -8,7 +8,8 @@ compatibility_flags = []
 workers_dev = true
 compatibility_date = "2022-06-24"
 kv_namespaces = [
-    { binding = "CONTENT", id = "0cd7ed7905ac4394b99cd8a50ba7d737", preview_id = "f50f4dbbda5848dea8dbfcca8fdd6535" }
+    { binding = "CONTENT", id = "0cd7ed7905ac4394b99cd8a50ba7d737", preview_id = "f50f4dbbda5848dea8dbfcca8fdd6535" },
+    { binding = "SUBSCRIPTIONS", id = "6cd3d6ea58734f7c99a22e728a0f788c", preview_id = "2cf4909364c5494abf775badef5569b4" }
 ]
 
 [site]
@@ -24,5 +25,6 @@ crons = ["*/10 * * * *"]
 # https://developers.cloudflare.com/workers/wrangler/cli-wrangler/commands/#kv
 [env.dev]
 kv_namespaces = [
-    { binding = "CONTENT", id = "0cd7ed7905ac4394b99cd8a50ba7d737", preview_id = "f50f4dbbda5848dea8dbfcca8fdd6535" }
+    { binding = "CONTENT", id = "0cd7ed7905ac4394b99cd8a50ba7d737", preview_id = "f50f4dbbda5848dea8dbfcca8fdd6535" },
+    { binding = "SUBSCRIPTIONS", id = "6cd3d6ea58734f7c99a22e728a0f788c", preview_id = "2cf4909364c5494abf775badef5569b4" }
 ]
