@@ -266,7 +266,8 @@
                         data: JSON.stringify({
                             "email": $(".control input.email").val() || "",
                             "hash": $(".setup .hash").text(),
-                            "value": $(".setup input.rangecontrol").val()
+                            "value": $(".setup input.rangecontrol").val(),
+                            "title": $(".setup .texttitle").text(),
                         }),
                         success: function(data) {
                             console.log(data);

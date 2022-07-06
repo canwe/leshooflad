@@ -22,6 +22,10 @@ entry-point = "workers-site"
 [triggers]
 crons = ["*/10 * * * *"]
 
+[vars]
+# The necessary secrets are:
+# - SENDINBLUE_API_KEY
+
 # https://developers.cloudflare.com/workers/wrangler/cli-wrangler/commands/#kv
 [env.dev]
 kv_namespaces = [
