@@ -1,5 +1,6 @@
 import { getAssetFromKV, mapRequestToAsset } from '@cloudflare/kv-asset-handler'
 import { deflateSync, inflateSync } from 'zlib'
+var URLSafeBase64 = require('urlsafe-base64');
 
 /**
  * The DEBUG flag will do two things that help during development:
@@ -38,6 +39,10 @@ async function handleEvent(event) {
 
   if ('/submit' == url.pathname) {
     return handleSubmit(event.request)
+  }
+
+  if ('/rec' == url.pathname) {
+    return handleRec(event.request)
   }
 
   let options = {}
@@ -123,6 +128,8 @@ async function handleFileUpload(request) {
     metadata: { uploaded: Date.now() },
   });
 
+  // https://stackabuse.com/encoding-and-decoding-base64-strings-in-node-js/
+  // https://stackoverflow.com/questions/7625251/compression-and-decompression-of-data-using-zlib-in-nodejs
   // inflateSync(new Buffer(gzipped, 'base64'));
 
   return new Response(
@@ -132,6 +139,43 @@ async function handleFileUpload(request) {
       size: file.size,
       excerpt: exc,
       hash,
+    }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
+}
+
+
+async function handleRec(request) {
+
+  const url = new URL(request.url)
+  let params = url.searchParams;
+  const token = params.get('lstoken');
+
+  console.log(`token = ${token}`)
+
+  // https://stackoverflow.com/questions/12631010/is-base64-encoding-url-safe
+  let token_b64 = URLSafeBase64.decode(token).toString();
+  let strkey = inflateSync(new Buffer(token_b64, 'base64')).toString();
+
+  console.log(`deflated token = ${strkey}`)
+
+  var hash, email, progress, title;
+  [hash, email, progress, title] = strkey.split(":");
+
+  if (isEmailValid(email)) {
+    await SUBSCRIPTIONS.put(hash + ":" + email, "", {
+      metadata: { created: Date.now(), progress: progress, title: title },
+    });
+    console.log(`created subscription ${strkey}`);
+  }
+  return new Response(
+    JSON.stringify({
+      status: 'ok',
     }),
     {
       status: 200,
@@ -232,21 +276,25 @@ async function sendMail(strkey, metadata) {
     progress: `${metadata.progress}`,
     previous: '',
     excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    token: '',
   }
 
-  var hash;
-  var email;
-
+  var hash, email;
   [hash, email] = strkey.split(":")
 
   let b64 = await CONTENT.get(hash);
   let content = inflateSync(new Buffer(b64, 'base64')).toString();
+
   var left, right;
   [left, right] = metadata.progress.split("/");
   [left, right] = [parseInt(left), parseInt(right)];
 
   const size = Math.ceil(content.length / right);
   post.excerpt = content.slice(size * (left - 1), size * left + 1);
+
+  let token_b64 = deflateSync(strkey + ":" + metadata.progress + ":" + metadata.title).toString('base64');
+  let safetoken = URLSafeBase64.encode(new Buffer(token_b64)).toString()
+  post.token = safetoken;
 
   const emailContent = emailTemplate(post);
 
@@ -300,9 +348,7 @@ async function processSubscription(item) {
   if (left < right) {
     meta.progress = "" + (left + 1) + "/" + right;
     await sendMail(item.name, meta);
-    await SUBSCRIPTIONS.put(item.name, "", {
-      metadata: meta,
-    });
+    await SUBSCRIPTIONS.delete(item.name);
     console.log('email has been sent', item.name);
   } else {
     await SUBSCRIPTIONS.delete(item.name);
@@ -827,10 +873,7 @@ const emailTemplate = post => `
                                         <br />
                                         <br />
                                         <h2>Excerpt ${post.progress}</h2>
-                                        ${post.excerpt}
-                                        <p>
-                                            Click on <a href="#!" target="_blank">this link</a> to finish reading this excerpt.
-                                        </p>
+                                        <p>${post.excerpt}</p>
                                     </td>
                                 </tr>
                             </table>
@@ -843,7 +886,7 @@ const emailTemplate = post => `
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter">
                                 <tr>
                                     <td valign="top" class="footerContent">
-                                        <a href="*|UNSUB|*">unsubscribe from this list</a>&nbsp;&nbsp;&nbsp;<a href="*|UPDATE_PROFILE|*">update subscription preferences</a>&nbsp;
+                                        Click on <a href="https://leshooflad.leshooflad.workers.dev/rec?lstoken=${post.token}" target="_blank">this link</a> to finish reading this excerpt and schedule the next email.
                                     </td>
                                 </tr>
                             </table>
