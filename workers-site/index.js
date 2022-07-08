@@ -269,6 +269,13 @@ async function handleSubmit(request) {
   );
 }
 
+function escapeHTML(s) {
+    return s.replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
 async function sendMail(strkey, metadata) {
   var post = {
     subject: `LeShooflad ${metadata.title} excerpt ${metadata.progress}`,
@@ -290,7 +297,9 @@ async function sendMail(strkey, metadata) {
   [left, right] = [parseInt(left), parseInt(right)];
 
   const size = Math.ceil(content.length / right);
-  post.excerpt = content.slice(size * (left - 1), size * left + 1);
+  content = content.slice(size * (left - 1), size * left + 1);
+  content = escapeHTML(content);
+  post.excerpt = content;
 
   let token_b64 = deflateSync(strkey + ":" + metadata.progress + ":" + metadata.title).toString('base64');
   let safetoken = URLSafeBase64.encode(new Buffer(token_b64)).toString()
